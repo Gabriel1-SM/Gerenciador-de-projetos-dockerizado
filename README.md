@@ -171,6 +171,17 @@ flutter doctor
 # Build para produção
 flutter build linux --release
 ```
+## 🐋 Executando o Projeto com Docker
+```bash
+# Para container
+docker compose down
+
+# Realizar build
+docker compose build --no-cache
+
+# Subir container
+docker compose up -d
+```
 
 ## 🔧 Solução de Problemas
 
