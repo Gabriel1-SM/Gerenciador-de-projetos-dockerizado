@@ -1,0 +1,40 @@
+version: "3.8"
+
+services:
+  flutter-web:
+    build: .
+    container_name: flutter-web-app
+    ports:
+      - "8080:80"
+    depends_on:
+      - mysql
+    restart: always
+
+  mysql:
+    image: mysql:5.7
+    container_name: flutter-mysql57
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: gerenciador_db
+      MYSQL_USER: gerenciador_user
+      MYSQL_PASSWORD: gerenciador_pass
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    restart: always
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: gerenciador_pma
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: root
+      PMA_PASSWORD: root
+    ports:
+      - "8081:80"
+    depends_on:
+      - mysql
+
+volumes:
+  mysql_data:
